@@ -8,19 +8,106 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  isAdmin   Boolean  @default(false)
-  email     String   @unique
-  name      String?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String      @id @default(cuid())
+  isAdmin    Boolean     @default(false)
+  email      String      @unique
+  name       String?
+  password   String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
   characters Character[]
 }
 
 model Character {
-  id        String   @id @default(cuid())
-  name      String
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  id                             String      @id @default(cuid())
+  name                           String
+  userId                         String
+  user                           User        @relation(fields: [userId], references: [id])
+  class                          Classes
+  subclass                       String?
+  race                           Races
+  background                     Backgrounds
+  proficiencyBonus               Int
+  selectedSkills                 String[]
+  strength                       Int
+  dexterity                      Int
+  constitution                   Int
+  intelligence                   Int
+  wisdom                         Int
+  charisma                       Int
+  acrobatics                     Int
+  animalHandling                 Int
+  arcana                         Int
+  athletics                      Int
+  deception                      Int
+  history                        Int
+  insight                        Int
+  intimidation                   Int
+  investigation                  Int
+  medicine                       Int
+  nature                         Int
+  perception                     Int
+  performance                    Int
+  persuasion                     Int
+  religion                       Int
+  sleightOfHand                  Int
+  stealth                        Int
+  survival                       Int
+  otherProficienciesAndLanguages String
+  equipment                      String
+  spells                         String
+  armorClass                     Int
+  initiative                     Int
+  speed                          Int
+  createdAt                      DateTime    @default(now())
+  updatedAt                      DateTime    @updatedAt
+}
+
+enum Classes {
+  BARBARIAN
+  BARD
+  CLERIC
+  DRUID
+  FIGHTER
+  MONK
+  PALADIN
+  RANGER
+  ROGUE
+  SORCERER
+  WARLOCK
+  WIZARD
+}
+
+enum Races {
+  Dragonborn
+  Dwarf_Hill
+  Dwarf_Mountain
+  Elf_Drow
+  Elf_High
+  Elf_Wood
+  Gnome_Forest
+  Gnome_Rock
+  Half_Elf
+  Half_Orc
+  Halfling_Lightfoot
+  Halfling_Stout
+  Human
+  Human_Variant
+  Tiefling
+}
+
+enum Backgrounds {
+  ACOLYTE
+  CHARLATAN
+  CRIMINAL
+  ENTERTAINER
+  FOLK_HERO
+  GUILD_ARTISAN
+  HERMIT
+  NOBLE
+  OUTLANDER
+  SAGE
+  SAILOR
+  SOLDIER
+  URCHIN
 }
