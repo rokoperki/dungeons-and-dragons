@@ -53,9 +53,9 @@ model Character {
   sleightOfHand                  Int
   stealth                        Int
   survival                       Int
-  otherProficienciesAndLanguages String
-  equipment                      String
-  spells                         String
+  otherProficienciesAndLanguages String[]
+  equipment                      String[]
+  spells                         String[]
   armorClass                     Int
   initiative                     Int
   speed                          Int

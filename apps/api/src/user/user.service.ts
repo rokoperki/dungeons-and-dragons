@@ -14,6 +14,12 @@ export class UserService {
     return this.prisma.user.create({ data: { ...rest, password: hash } });
   }
 
+  findOneById(id: string) {
+    return this.prisma.user.findUnique({
+      where: { id },
+    });
+  }
+
   findAll() {
     return this.prisma.user.findMany();
   }
