@@ -29,10 +29,15 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Get(':email')
+  @Get('/email/:email')
   @UseGuards(AuthGuard)
   findOne(@Param('email') email: string) {
     return this.userService.findByEmail(email);
+  }
+
+  @Get(':id')
+  findById(@Param('id') id: string) {
+    return this.userService.findOneById(id);
   }
 
   @Patch(':id')

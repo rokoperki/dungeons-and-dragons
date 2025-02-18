@@ -23,6 +23,7 @@ model Character {
   name                           String
   userId                         String
   user                           User        @relation(fields: [userId], references: [id])
+  isActive                       Boolean     @default(true)
   class                          Classes
   subclass                       String?
   race                           Races

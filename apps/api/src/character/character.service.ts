@@ -17,7 +17,6 @@ export class CharacterService {
 
       const characterData = {
         ...createCharacterDto,
-        user: undefined,
         userId: createCharacterDto.userId,
         otherProficienciesAndLanguages: Array.isArray(
           createCharacterDto.otherProficienciesAndLanguages,
@@ -34,7 +33,7 @@ export class CharacterService {
 
       return await this.prisma.character.create({ data: characterData });
     } catch (error) {
-      throw new BadRequestException(error.errors);
+      throw new BadRequestException(error);
     }
   }
 
@@ -50,10 +49,9 @@ export class CharacterService {
     try {
       UpdateCharacterSchema.parse(updateCharacterDto);
 
-      const { userId, ...rest } = updateCharacterDto;
-      const { user, ...characterData } = {
-        ...rest,
-        userId: userId ?? '',
+      const characterData = {
+        ...updateCharacterDto,
+        userId: updateCharacterDto.userId || '',
         otherProficienciesAndLanguages: Array.isArray(
           updateCharacterDto.otherProficienciesAndLanguages,
         )
@@ -76,13 +74,12 @@ export class CharacterService {
               (item): item is string => !!item,
             ),
       };
-
       return await this.prisma.character.update({
         where: { id },
         data: characterData,
       });
     } catch (error) {
-      throw new BadRequestException(error.errors);
+      throw new BadRequestException(error);
     }
   }
 

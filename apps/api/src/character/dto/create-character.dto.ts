@@ -1,11 +1,10 @@
-import { Backgrounds, Classes, Races, User } from '@prisma/client';
+import { Backgrounds, Classes, Races } from '@prisma/client';
 import { z } from 'zod';
 
 export class CreateCharacterDto {
-  id: string;
   name: string;
   userId: string;
-  user: User;
+  isActive?: boolean;
   class: Classes;
   subclass?: string;
   race: Races;
@@ -42,8 +41,6 @@ export class CreateCharacterDto {
   armorClass: number;
   initiative: number;
   speed: number;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 const ClassesEnum = z.enum([
@@ -96,9 +93,9 @@ const BackgroundsEnum = z.enum([
 ]);
 
 export const CreateCharacterSchema = z.object({
-  id: z.string().uuid(),
   name: z.string(),
-  userId: z.string().uuid(),
+  userId: z.string(),
+  isActive: z.boolean().optional(),
   class: ClassesEnum,
   subclass: z.string().optional(),
   race: RacesEnum,
@@ -135,13 +132,12 @@ export const CreateCharacterSchema = z.object({
   armorClass: z.number(),
   initiative: z.number(),
   speed: z.number(),
-  createdAt: z.date().default(new Date()),
-  updatedAt: z.date().default(new Date()),
 });
 
 export const UpdateCharacterSchema = z.object({
   name: z.string().optional(),
-  userId: z.string().uuid().optional(),
+  userId: z.string().uuid(),
+  isActive: z.boolean().optional(),
   class: ClassesEnum.optional(),
   subclass: z.string().optional(),
   race: RacesEnum.optional(),
@@ -178,5 +174,4 @@ export const UpdateCharacterSchema = z.object({
   armorClass: z.number().optional(),
   initiative: z.number().optional(),
   speed: z.number().optional(),
-  updatedAt: z.date().default(new Date()).optional(),
 });
