@@ -31,7 +31,7 @@ const Login: React.FC<LoginPageProps> = ({ setAuthorizePage }) => {
 
     try {
       const result = await login(loginData);
-      Cookies.set("accessToken", result.access_token);
+      Cookies.set("accessToken", result.accessToken);
     } catch (error) {
       console.error("Login failed:", error);
       setError("Login failed");

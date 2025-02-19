@@ -3,7 +3,7 @@ export interface LoginData {
   password: string;
 }
 
-const login = async (loginData: LoginData): Promise<any> => {
+const login = async (loginData: LoginData): Promise<{ accessToken: string }> => {
   const response = await fetch("http://localhost:8000/api/auth/login", {
     method: "POST",
     headers: {

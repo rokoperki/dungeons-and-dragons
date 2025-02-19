@@ -4,7 +4,7 @@ export interface SignupData {
     name?: string;
   }
   
-  export async function signup(signupData: SignupData): Promise<any> {
+  export async function signup(signupData: SignupData): Promise<{ accessToken: string }> {
     const response = await fetch('http://localhost:8000/api/auth/register', {
       method: 'POST',
       headers: {
