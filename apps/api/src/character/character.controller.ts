@@ -37,6 +37,7 @@ export class CharacterController {
   }
 
   @Get('/user/:userId')
+  @UseGuards(AuthGuard)
   findByUserId(@Param('userId') userId: string) {
     return this.characterService.findByUserId(userId);
   }
