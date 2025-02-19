@@ -10,7 +10,7 @@ export class CreateCharacterDto {
   race: Races;
   background: Backgrounds;
   proficiencyBonus: number;
-  selectedSkills: string[];
+  selectedSkills?: string[];
   strength: number;
   dexterity: number;
   constitution: number;
@@ -35,9 +35,9 @@ export class CreateCharacterDto {
   sleightOfHand: number;
   stealth: number;
   survival: number;
-  otherProficienciesAndLanguages: string;
-  equipment: string;
-  spells: string;
+  otherProficienciesAndLanguages?: string[];
+  equipment?: string[];
+  spells?: string[];
   armorClass: number;
   initiative: number;
   speed: number;
@@ -92,7 +92,7 @@ const BackgroundsEnum = z.enum([
   'URCHIN',
 ]);
 
-export const CreateCharacterSchema = z.object({
+export const CharacterSchema = z.object({
   name: z.string(),
   userId: z.string(),
   isActive: z.boolean().optional(),
@@ -126,52 +126,10 @@ export const CreateCharacterSchema = z.object({
   sleightOfHand: z.number(),
   stealth: z.number(),
   survival: z.number(),
-  otherProficienciesAndLanguages: z.string(),
-  equipment: z.array(z.string()),
-  spells: z.array(z.string()),
+  otherProficienciesAndLanguages: z.array(z.string()).optional(),
+  equipment: z.array(z.string()).optional(),
+  spells: z.array(z.string()).optional(),
   armorClass: z.number(),
   initiative: z.number(),
   speed: z.number(),
-});
-
-export const UpdateCharacterSchema = z.object({
-  name: z.string().optional(),
-  userId: z.string().uuid(),
-  isActive: z.boolean().optional(),
-  class: ClassesEnum.optional(),
-  subclass: z.string().optional(),
-  race: RacesEnum.optional(),
-  background: BackgroundsEnum.optional(),
-  proficiencyBonus: z.number().optional(),
-  selectedSkills: z.array(z.string()).optional(),
-  strength: z.number().optional(),
-  dexterity: z.number().optional(),
-  constitution: z.number().optional(),
-  intelligence: z.number().optional(),
-  wisdom: z.number().optional(),
-  charisma: z.number().optional(),
-  acrobatics: z.number().optional(),
-  animalHandling: z.number().optional(),
-  arcana: z.number().optional(),
-  athletics: z.number().optional(),
-  deception: z.number().optional(),
-  history: z.number().optional(),
-  insight: z.number().optional(),
-  intimidation: z.number().optional(),
-  investigation: z.number().optional(),
-  medicine: z.number().optional(),
-  nature: z.number().optional(),
-  perception: z.number().optional(),
-  performance: z.number().optional(),
-  persuasion: z.number().optional(),
-  religion: z.number().optional(),
-  sleightOfHand: z.number().optional(),
-  stealth: z.number().optional(),
-  survival: z.number().optional(),
-  otherProficienciesAndLanguages: z.string().optional(),
-  equipment: z.array(z.string()).optional(),
-  spells: z.array(z.string()).optional(),
-  armorClass: z.number().optional(),
-  initiative: z.number().optional(),
-  speed: z.number().optional(),
 });
